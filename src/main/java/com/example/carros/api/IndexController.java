@@ -33,17 +33,13 @@ public class IndexController {
    
     /*
       Nao e recomendado passar a SENHA como parametro no get pois a senha fica visivel
-      Sempre recomendado nesse tipo de caso utilizar o POS 
+      Sempre recomendado nesse tipo de caso utilizar o POST 
     */
      
     @PostMapping("/login")
      public String login(@RequestParam("login") String login, @RequestParam("senha") String senha){
         return "Login: " + login + ", Senha: " + senha;
      }
-
-
-
-
 
 
 
@@ -72,7 +68,9 @@ public class IndexController {
      public String getcarroByTipo(@PathVariable("tipo")String tipo){
         return "Lista Carros: " + tipo;
      }
-*/
+
+
+     */
 
  
     /* 
