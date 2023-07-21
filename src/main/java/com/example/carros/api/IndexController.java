@@ -1,12 +1,14 @@
 package com.example.carros.api;
 
 //import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
  
  /*
@@ -31,17 +33,32 @@ public class IndexController {
    
     /*
       Nao e recomendado passar a SENHA como parametro no get pois a senha fica visivel
-      Sempre recomendado nesse tipo de caso utilizar o POST
+      Sempre recomendado nesse tipo de caso utilizar o POS 
     */
      
-     @GetMapping
+    @PostMapping("/login")
+     public String login(@RequestParam("login") String login, @RequestParam("senha") String senha){
+        return "Login: " + login + ", Senha: " + senha;
+     }
+
+
+
+
+
+
+
+     /* 
+       
+     -- Exemplos basicos de operaçoes com GetMapping
+     
+    @GetMapping
     public String get(){
         return "Get Spring boot";
     }
     
     
     @GetMapping("/login/{login}/senha/{senha}")
-     public String login(@PathVariable("login") String login, @PathVariable("senha") String senha){
+    public String login(@PathVariable("login") String login, @PathVariable("senha") String senha){
         return "Login: " + login + ", Senha: " + senha;
      }
  
@@ -55,11 +72,12 @@ public class IndexController {
      public String getcarroByTipo(@PathVariable("tipo")String tipo){
         return "Lista Carros: " + tipo;
      }
+*/
 
  
     /* 
    
-    -- Exemplos Básicos de operações GET, POST , DELETE e PUT
+    -- Exemplos Básicos de "operações" GET, POST , DELETE e PUT
    
     @GetMapping
     public String get(){
