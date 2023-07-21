@@ -23,9 +23,26 @@ public class IndexController {
    @RequestMapping(method = RequestMethod.GET)
    tipo do metodo GET ,POST, PUT ou DELETE sera definido ao fim da linha
    */
+  
+    /*
+    Mapeamento padrao da classe definido pelo RequestMapping("/") 
+    sendo assim metodo abaixo sera mapeado pelo mesmo
+    */
    @GetMapping
    public String hello(){
         return "Hello Spring boot";
     }
     
+    /* 
+    Mapeamento abaixo sendo definido como ("/teste")
+    para que nao haja conflitos com mapeamento do metodo acima
+    */
+   @GetMapping("/teste")
+   public String teste(){
+       return "Teste Spring boot";
+   }
+
+
+
+
 }
