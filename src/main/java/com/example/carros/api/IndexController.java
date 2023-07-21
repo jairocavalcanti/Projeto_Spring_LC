@@ -1,10 +1,11 @@
 package com.example.carros.api;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
+//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
  
  /*
@@ -27,7 +28,28 @@ public class IndexController {
     Mapeamento padrao da classe definido pelo RequestMapping("/") 
     */
    
-  
+    /*
+      Nao e recomendado passar a SENHA como parametro no get pois a senha fica visivel
+      Sempre recomendado nesse tipo de caso utilizar o POST
+    */
+     
+     @GetMapping
+    public String get(){
+        return "Get Spring boot";
+    }
+    
+    
+    @GetMapping("/login")
+     public String login(@RequestParam("login") String login, @RequestParam("senha") String senha){
+        return "Login: " + login + ", Senha: " + senha;
+     }
+ 
+
+ 
+    /* 
+   
+    -- Exemplos Básicos de operações GET, POST , DELETE e PUT
+   
     @GetMapping
     public String get(){
         return "Get Spring boot";
@@ -49,6 +71,7 @@ public class IndexController {
    public String put(){
         return "Put Spring boot";
     }
+    */
 
 
 
