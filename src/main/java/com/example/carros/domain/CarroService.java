@@ -13,12 +13,19 @@ public class CarroService {
     @Autowired
     private CarroRepository rep;
 
+    //Retornando todos os carros
      public Iterable<Carro> getCarros(){
        return rep.findAll();
     }
 
-     public Optional<Carro> getCarrosById(Long id) {
+    //Retornado carros pelo ID
+    public Optional<Carro> getCarrosById(Long id) {
         return rep.findById(id);
+    }
+    
+
+    public Iterable<Carro> getCarrosByTipo(String tipo) {
+        return rep.findByTipo(tipo);
     }
 
 
@@ -31,6 +38,8 @@ public class CarroService {
 
        return carros;
     }
+
+  
 
 
    
