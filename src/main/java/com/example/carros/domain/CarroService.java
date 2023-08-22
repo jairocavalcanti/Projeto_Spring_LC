@@ -23,7 +23,7 @@ public class CarroService {
         return rep.findById(id);
     }
     
-
+    //Retornando carros pelo TIPO
     public Iterable<Carro> getCarrosByTipo(String tipo) {
         return rep.findByTipo(tipo);
     }

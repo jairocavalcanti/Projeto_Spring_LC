@@ -25,12 +25,13 @@ public class CarrosController {
         return service.getCarros();
      }
 
-     //metodo "pegando" carro pelo ID atraves  do optional na classe 'carroservice'
+     //metodo "pegando" carro pelo ID atraves do optional na classe 'carroservice'
      @GetMapping("/{id}")
      public Optional<Carro> get(@PathVariable ("id") Long id){
         return service.getCarrosById(id);
      }
 
+      //metodo "pegando" carro pelo TIPO atraves do iterable na classe 'carroservice'
      @GetMapping("/tipo/{tipo}")
      public Iterable<Carro> getCarrosByTipo(@PathVariable ("tipo") String tipo){
         return service.getCarrosByTipo(tipo);
