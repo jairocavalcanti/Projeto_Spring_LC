@@ -13,23 +13,28 @@ import com.example.carros.domain.Carro;
 import com.example.carros.domain.CarroService;
  
 
-@RestController
-@RequestMapping("/api/v1/carros")
+@RestController // Indica que esta classe é um controlador REST
+@RequestMapping("/api/v1/carros") // Define o mapeamento de URL para todas as rotas neste controlador
 public class CarrosController {
     
-     @Autowired
+     @Autowired // Injeção de dependência: Spring irá injetar uma instância de CarroService automaticamente.
      private CarroService service;
 
-     @GetMapping()
+     @GetMapping() // Mapeia a rota GET "/api/v1/carros".
      public Iterable<Carro> get(){
         return service.getCarros();
      }
 
+     //metodos precisam ter mapeamentos diferentes
+     
      //metodo "pegando" carro pelo ID atraves do optional na classe 'carroservice'
      @GetMapping("/{id}")
      public Optional<Carro> get(@PathVariable ("id") Long id){
         return service.getCarrosById(id);
      }
+
+      // "Path Variable" serve para inserção de dados na requisição de forma mais sofisticada
+
 
       //metodo "pegando" carro pelo TIPO atraves do iterable na classe 'carroservice'
      @GetMapping("/tipo/{tipo}")
