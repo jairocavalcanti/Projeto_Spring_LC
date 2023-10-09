@@ -28,6 +28,9 @@ public class CarroService {
         return rep.findByTipo(tipo);
     }
 
+    public Carro save(Carro carro) {
+      return rep.save(carro);
+    }
 
     public List<Carro> getCarrosfake(){
        List<Carro> carros = new ArrayList<>();
@@ -38,6 +41,12 @@ public class CarroService {
 
        return carros;
     }
+
+
+
+  
+  
+
 
   
 
