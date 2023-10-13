@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class CarroService {
@@ -42,6 +43,29 @@ public class CarroService {
        return carros;
     }
 
+    public Carro update (Carro carro, Long id){
+        Assert.notNull(id, "Nao foi possivel atualizar o registro");
+
+        // Busca o carro no banco de dados
+        Optional<Carro> optional = getCarrosById(id);
+        //Verificando se o id do carro existe
+        if(optional.isPresent()){
+          Carro db = optional.get();
+          
+          // Copiar as propriedades
+          db.setNome(carro.getNome());
+          db.setTipo(carro.getTipo());
+          System.out.println("Carro id " + db.getId());
+        
+          //Por fim atualiza o carrro
+          rep.save(db);
+
+          return db;
+
+        }else{
+           throw new RuntimeException("Nao foi possivel atualizar o registro");
+        }
+    }
 
 
   

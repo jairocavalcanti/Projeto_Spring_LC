@@ -45,7 +45,7 @@ public class CarrosController {
      }
 
      //'RequestBody' converte o json do 'carro' para o objeto carro
-     //O json precisa ter os mesmos atributos do objeto
+     //O json precisa ter os mesmos atributos do objeto, exceto "id" que é autoincrementado
      @PostMapping
      public String post(@RequestBody Carro carro){
         Carro c = service.save(carro);
@@ -54,5 +54,7 @@ public class CarrosController {
 
       }
 
+      /* !! ALTERAÇÕES DE DADOS PODEM SER FEITAS PASSANDO O ID COMO PARAMETRO ATRAVES DO METODO "post" DA APLICAÇÃO !! */
 
-}
+
+   }
