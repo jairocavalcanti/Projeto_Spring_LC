@@ -73,8 +73,5 @@ public class CarroService {
       if(carro.isPresent()){
         rep.deleteById(id);
       }
-    }
-  
-  
-
+   }
 }
