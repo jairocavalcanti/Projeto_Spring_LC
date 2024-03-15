@@ -34,15 +34,33 @@ public class CarrosController {
      //metodos precisam ter mapeamentos diferentes
      
      //metodo "pegando" carro pelo ID atraves do optional na classe 'carroservice'
+   
      @GetMapping("/{id}")
-     public Optional<Carro> get(@PathVariable ("id") Long id){
-        return service.getCarrosById(id);
-     }
+     public ResponseEntity get(@PathVariable ("id") Long id){
+        Optional<Carro> carro = service.getCarrosById(id);
+
+        //Formas de implementar o erro '404 not found'
+        
+        return  carro.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+        
+       // return carro.isPresent() ?
+       //      ResponseEntity.ok(carro.get()):
+       //     ResponseEntity.notFound().build();
+
+        // if(carro.isPresent()){
+        //   Carro c = carro.get();
+        //   return ResponseEntity.ok(carro.get());
+        //  }else{
+        //    return ResponseEntity.notFound().build();
+      }
+
+     
 
       // "Path Variable" serve para inserção de dados na requisição de forma mais sofisticada
 
 
-      //metodo "pegando" carro pelo TIPO atraves do iterable na classe 'carroservice'
+     //metodo "pegando" carro pelo TIPO atraves do iterable na classe 'carroservice'
      @GetMapping("/tipo/{tipo}")
      public Iterable<Carro> getCarrosByTipo(@PathVariable ("tipo") String tipo){
         return service.getCarrosByTipo(tipo);
