@@ -1,6 +1,6 @@
 package com.example.carros.api;
 
-
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class CarrosController {
      public ResponseEntity<Iterable<Carro>> get(){
        return ResponseEntity.ok(service.getCarros()); 
       //return new ResponseEntity<>(service.getCarros(), HttpStatus.OK);
-     }
+      }
 
      //metodos precisam ter mapeamentos diferentes
      
@@ -55,29 +55,36 @@ public class CarrosController {
         //    return ResponseEntity.notFound().build();
       }
 
-     
 
-      // "Path Variable" serve para inserção de dados na requisição de forma mais sofisticada
+     // "Path Variable" serve para inserção de dados na requisição de forma mais sofisticada
 
-
-     //metodo "pegando" carro pelo TIPO atraves do iterable na classe 'carroservice'
+     // metodo "pegando" carro pelo TIPO atraves do iterable na classe 'carroservice'
      @GetMapping("/tipo/{tipo}")
-     public Iterable<Carro> getCarrosByTipo(@PathVariable ("tipo") String tipo){
-        return service.getCarrosByTipo(tipo);
-     }
+     public ResponseEntity getCarrosByTipo(@PathVariable ("tipo") String tipo){
+       List<Carro> carros = service.getCarrosByTipo(tipo);
 
-     //'RequestBody' converte o json do 'carro' para o objeto carro
-     //O json precisa ter os mesmos atributos do objeto, exceto "id" que é autoincrementado
+       // Se a lista de carros estiver vazia
+       return carros.isEmpty() ?
+              // Retornamos o "noContent().build()" que é o 204
+              ResponseEntity.noContent().build() :
+              // Caso contrario retorne 'ok' e passe a lista de carros
+              // ':' significa caso contrario
+              ResponseEntity.ok(carros);    
+      }
+
+    
+     // 'RequestBody' converte o json do 'carro' para o objeto carro
+     // O json precisa ter os mesmos atributos do objeto, exceto "id" que é autoincrementado
      @PostMapping
      public String post(@RequestBody Carro carro){
         Carro c = service.save(carro);
     
         return "Carro salvo com sucesso: " + c.getId();
-
+     
       }
 
-      /* !! ALTERAÇÕES DE DADOS PODEM SER FEITAS PASSANDO O ID COMO PARAMETRO ATRAVES DO METODO "post" DA APLICAÇÃO !! */
-
+      //!! ALTERAÇÕES DE DADOS PODEM SER FEITAS PASSANDO O ID COMO PARAMETRO ATRAVES DO METODO "post" DA APLICAÇÃO !! 
+      
       @PutMapping("{id}")
       public String put(@PathVariable("id") Long id, @RequestBody Carro carro){
 
@@ -93,5 +100,5 @@ public class CarrosController {
 
          return "Carro deletado com sucesso";
       }
-
+   
    }

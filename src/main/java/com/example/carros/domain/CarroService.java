@@ -11,27 +11,27 @@ import org.springframework.util.Assert;
 @Service
 public class CarroService {
 
-    @Autowired
-    private CarroRepository rep;
+   @Autowired
+   private CarroRepository rep;
 
     //Retornando todos os carros
-    public Iterable<Carro> getCarros(){
+   public Iterable<Carro> getCarros(){
        return rep.findAll();
-    }
+   }
 
     //Retornado carros pelo ID
-    public Optional<Carro> getCarrosById(Long id) {
+   public Optional<Carro> getCarrosById(Long id) {
         return rep.findById(id);
-    }
+   }
     
     //Retornando carros pelo TIPO
-    public Iterable<Carro> getCarrosByTipo(String tipo) {
+   public List<Carro> getCarrosByTipo(String tipo) {
         return rep.findByTipo(tipo);
-    }
+   }
 
-    public Carro save(Carro carro) {
+   public Carro save(Carro carro) {
       return rep.save(carro);
-    }
+   }
 
     public List<Carro> getCarrosfake(){
        List<Carro> carros = new ArrayList<>();
@@ -41,7 +41,7 @@ public class CarroService {
        carros.add(new Carro(3L, "BRASILIA AMARELA"));
 
        return carros;
-    }
+   }
 
     public Carro update (Carro carro, Long id){
         Assert.notNull(id, "Nao foi possivel atualizar o registro");
@@ -64,8 +64,8 @@ public class CarroService {
 
         }else{
            throw new RuntimeException("Nao foi possivel atualizar o registro");
-        }
-    }
+         }
+      }
 
     
     public void delete(Long id){
