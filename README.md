@@ -26,3 +26,10 @@ Repositorio dedicado ao armazenamento de projeto de lista de carros com Spring B
 - POST - Salvar Carro
 - PUT - Atualizar o Carro
 - DELETE - Excluir um Carro
+
+## HTTP Status Code - Parte_1
+
+- Status Code de retorno do protocolo HTTP
+- ResponseEntity
+- GET - 404 Not Found
+- GET - 204 No Content (CrudRepository)
