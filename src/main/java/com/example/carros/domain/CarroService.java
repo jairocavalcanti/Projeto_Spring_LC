@@ -1,6 +1,5 @@
 package com.example.carros.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,15 +32,16 @@ public class CarroService {
       return rep.save(carro);
    }
 
+   /* 
    public List<Carro> getCarrosfake() {
       List<Carro> carros = new ArrayList<>();
 
-      carros.add(new Carro(1l, "FUSCA"));
-      carros.add(new Carro(2L, "FIAT MAREA"));
-      carros.add(new Carro(3L, "BRASILIA AMARELA"));
+      carros.add(new Carro(1l, "FUSCA", "Popular"));
+      carros.add(new Carro(2L, "FIAT MAREA", "Popular"));
+      carros.add(new Carro(3L, "BRASILIA AMARELA", "Popular"));
 
       return carros;
-   }
+   } */
 
    public Carro update(Carro carro, Long id) {
       Assert.notNull(id, "Nao foi possivel atualizar o registro");
