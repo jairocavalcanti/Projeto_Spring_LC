@@ -14,64 +14,62 @@ public class CarroService {
    @Autowired
    private CarroRepository rep;
 
-    //Retornando todos os carros
-   public Iterable<Carro> getCarros(){
-       return rep.findAll();
+   // Retornando todos os carros
+   public Iterable<Carro> getCarros() {
+      return rep.findAll();
    }
 
-    //Retornado carros pelo ID
+   // Retornado carros pelo ID
    public Optional<Carro> getCarrosById(Long id) {
-        return rep.findById(id);
+      return rep.findById(id);
    }
-    
-    //Retornando carros pelo TIPO
+
+   // Retornando carros pelo TIPO
    public List<Carro> getCarrosByTipo(String tipo) {
-        return rep.findByTipo(tipo);
+      return rep.findByTipo(tipo);
    }
 
    public Carro save(Carro carro) {
       return rep.save(carro);
    }
 
-    public List<Carro> getCarrosfake(){
-       List<Carro> carros = new ArrayList<>();
+   public List<Carro> getCarrosfake() {
+      List<Carro> carros = new ArrayList<>();
 
-       carros.add(new Carro(1l, "FUSCA"));
-       carros.add(new Carro(2L, "FIAT MAREA"));
-       carros.add(new Carro(3L, "BRASILIA AMARELA"));
+      carros.add(new Carro(1l, "FUSCA"));
+      carros.add(new Carro(2L, "FIAT MAREA"));
+      carros.add(new Carro(3L, "BRASILIA AMARELA"));
 
-       return carros;
+      return carros;
    }
 
-    public Carro update (Carro carro, Long id){
-        Assert.notNull(id, "Nao foi possivel atualizar o registro");
+   public Carro update(Carro carro, Long id) {
+      Assert.notNull(id, "Nao foi possivel atualizar o registro");
 
-        // Busca o carro no banco de dados
-        Optional<Carro> optional = getCarrosById(id);
-        //Verificando se o id do carro existe
-        if(optional.isPresent()){
-          Carro db = optional.get();
-          
-          // Copiar as propriedades
-          db.setNome(carro.getNome());
-          db.setTipo(carro.getTipo());
-          System.out.println("Carro id " + db.getId());
-        
-          //Por fim atualiza o carrro
-          rep.save(db);
+      // Busca o carro no banco de dados
+      Optional<Carro> optional = getCarrosById(id);
+      if (optional.isPresent()) {
+         Carro db = optional.get();
 
-          return db;
+         // Copiar as propriedades
+         db.setNome(carro.getNome());
+         db.setTipo(carro.getTipo());
+         System.out.println("Carro id " + db.getId());
 
-        }else{
-           throw new RuntimeException("Nao foi possivel atualizar o registro");
-         }
+         // Por fim atualiza o carrro
+         rep.save(db);
+
+         return db;
+
+      } else {
+         throw new RuntimeException("Nao foi possivel atualizar o registro");
       }
+   }
 
-    
-    public void delete(Long id){
+   public void delete(Long id) {
       Optional<Carro> carro = getCarrosById(id);
-      if(carro.isPresent()){
-        rep.deleteById(id);
+      if (carro.isPresent()) {
+         rep.deleteById(id);
       }
    }
 }
