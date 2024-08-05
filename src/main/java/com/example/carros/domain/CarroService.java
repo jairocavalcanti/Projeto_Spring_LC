@@ -2,10 +2,13 @@ package com.example.carros.domain;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import com.example.carros.domain.dto.CarroDTO;
 
 @Service
 public class CarroService {
@@ -14,8 +17,10 @@ public class CarroService {
    private CarroRepository rep;
 
    // Retornando todos os carros
-   public Iterable<Carro> getCarros() {
-      return rep.findAll();
+   public List<CarroDTO> getCarros() {
+
+      return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
+
    }
 
    // Retornado carros pelo ID
@@ -24,24 +29,25 @@ public class CarroService {
    }
 
    // Retornando carros pelo TIPO
-   public List<Carro> getCarrosByTipo(String tipo) {
-      return rep.findByTipo(tipo);
+   public List<CarroDTO> getCarrosByTipo(String tipo) {
+      return rep.findByTipo(tipo).stream().map(CarroDTO::new).collect(Collectors.toList());
    }
 
    public Carro save(Carro carro) {
       return rep.save(carro);
    }
 
-   /* 
-   public List<Carro> getCarrosfake() {
-      List<Carro> carros = new ArrayList<>();
-
-      carros.add(new Carro(1l, "FUSCA", "Popular"));
-      carros.add(new Carro(2L, "FIAT MAREA", "Popular"));
-      carros.add(new Carro(3L, "BRASILIA AMARELA", "Popular"));
-
-      return carros;
-   } */
+   /*
+    * public List<Carro> getCarrosfake() {
+    * List<Carro> carros = new ArrayList<>();
+    * 
+    * carros.add(new Carro(1l, "FUSCA", "Popular"));
+    * carros.add(new Carro(2L, "FIAT MAREA", "Popular"));
+    * carros.add(new Carro(3L, "BRASILIA AMARELA", "Popular"));
+    * 
+    * return carros;
+    * }
+    */
 
    public Carro update(Carro carro, Long id) {
       Assert.notNull(id, "Nao foi possivel atualizar o registro");
